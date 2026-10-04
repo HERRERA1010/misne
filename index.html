@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MISNE - Official Site</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #000000;
+    --bg-alt: #0a0a0a;
+    --text: #f5f5f5;
+    --text-dim: #a0a0a0;
+    --accent: #c9c9c9;
+    --blood: #8b0000;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    padding: 0.7rem 2rem;
+    background: rgba(0, 0, 0, 0.95);
+  }
+
+  .logo-container {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .logo-container:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+  }
+
+  .logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .logo-placeholder {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .navbar-nav {
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    color: var(--text) !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0 !important;
+  }
+
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--accent) !important;
+  }
+
+  .nav-link:hover::before {
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28245, 245, 245, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 70%);
+    padding: 8rem 1rem 3rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.08) 0%, transparent 40%);
+    animation: pulse 8s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .fog {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 60%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    animation: fogMove 20s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes fogMove {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 3/4;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .hero-image-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(1.1);
+    transition: all 0.5s ease;
+  }
+
+  .hero-image-container:hover img {
+    filter: grayscale(0%) contrast(1.2);
+    transform: scale(1.05);
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 10vw, 7rem);
+    letter-spacing: 0.2em;
+    color: var(--text);
+    position: relative;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    animation: glitch 5s infinite;
+    margin-bottom: 1rem;
+  }
+
+  @keyframes glitch {
+    0%, 90%, 100% {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      transform: translate(0);
+    }
+    92% {
+      text-shadow: 3px 0 #8b0000, -3px 0 #00ffff;
+      transform: translate(-2px, 1px);
+    }
+    94% {
+      text-shadow: -3px 0 #8b0000, 3px 0 #00ffff;
+      transform: translate(2px, -1px);
+    }
+    96% {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      transform: translate(0);
+    }
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    letter-spacing: 0.5em;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+    50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 5rem 1rem;
+    position: relative;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--text);
+    margin: 1rem auto 0;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-content p {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    line-height: 1.9;
+  }
+
+  .about-content p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .feature-card {
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .feature-card:hover::before {
+    left: 100%;
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+
+  .feature-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  /* ===== AVANCES ===== */
+  .avance-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+    height: 100%;
+  }
+
+  .avance-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .avance-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avance-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(139, 0, 0, 0.1) 0%, transparent 70%);
+  }
+
+  .avance-content {
+    padding: 1.5rem;
+  }
+
+  .avance-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .avance-date {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .avance-description {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ===== ROADMAP ===== */
+  .roadmap-item {
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .roadmap-content {
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .roadmap-content:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .roadmap-phase {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 3vw, 1.3rem);
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .roadmap-date {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .roadmap-content p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .roadmap-content ul {
+    list-style: none;
+    margin-top: 0.8rem;
+    padding-left: 0;
+  }
+
+  .roadmap-content ul li {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .roadmap-content ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--text);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-wrapper p {
+    color: var(--text-dim);
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    margin-bottom: 3rem;
+    line-height: 1.9;
+  }
+
+  .contact-wrapper p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .contact-email {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    text-decoration: none;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    word-break: break-all;
+  }
+
+  .contact-email::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--text);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+
+  .contact-email span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  .contact-email:hover::before {
+    transform: translateX(0);
+  }
+
+  .contact-email:hover span {
+    color: var(--bg);
+  }
+
+  /* ===== DONATIONS ===== */
+  .donations-content p {
+    color: var(--text-dim);
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    margin-bottom: 3rem;
+    line-height: 1.9;
+  }
+
+  .donations-content p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .bmc-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid var(--text);
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bmc-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--text);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+
+  .bmc-button span,
+  .bmc-button svg {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  .bmc-button:hover::before {
+    transform: translateX(0);
+  }
+
+  .bmc-button:hover span,
+  .bmc-button:hover svg {
+    color: var(--bg);
+  }
+
+  .bmc-button svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 3rem 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  footer .social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  footer .social a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  footer .social a:hover {
+    color: var(--text);
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ADJUSTMENTS ===== */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem;
+    }
+
+    .navbar-nav {
+      gap: 1rem;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    section {
+      padding: 4rem 1rem;
+    }
+
+    .hero {
+      padding: 7rem 1rem 2rem;
+    }
+
+    .feature-card,
+    .avance-card,
+    .roadmap-content {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero-title {
+      letter-spacing: 0.1em;
+    }
+
+    .logo-container {
+      width: 50px;
+      height: 50px;
+    }
+
+    .contact-email {
+      padding: 0.8rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+  <div class="container-fluid px-3 px-md-4">
+    <a class="navbar-brand p-0" href="#">
+      <div class="logo-container">
+        <!-- Reemplaza este contenido con tu logo PNG -->
+        <!-- <img src="tu-logo.png" alt="MISNE Logo"> -->
+        <span class="logo-placeholder">LOGO<br>PNG</span>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#about">Sobre Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="#avances">Avances</a></li>
+        <li class="nav-item"><a class="nav-link" href="#roadmap">Roadmap</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="#donations">Donaciones</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="fog"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col">
+        <div class="hero-content">
+          <h1 class="hero-title">MISNE</h1>
+          <p class="hero-subtitle">Un juego de terror</p>
+          <p class="hero-tagline">"Donde los susurros del pasado nunca descansan..."</p>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+  <div class="scroll-indicator">↓ Desliza ↓</div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title reveal">Sobre Nosotros</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-content reveal">
+          <p>
+            Somos un estudio independiente dedicado a crear experiencias de terror que desafían los límites
+            de lo convencional. <strong>MISNE</strong> nace de nuestra pasión por las historias oscuras,
+            los ambientes opresivos y el terror psicológico que se queda contigo mucho después de apagar la pantalla.
+          </p>
+          <p>
+            Cada detalle, cada sombra, cada sonido ha sido cuidadosamente diseñado para sumergirte en una
+            atmósfera única donde el miedo no es solo un susto, sino una experiencia.
+          </p>
+        </div>
+
+        <div class="row g-4 mt-4">
+          <div class="col-md-4">
+            <div class="feature-card reveal">
+              <div class="feature-icon">🕯️</div>
+              <h3>Atmósfera</h3>
+              <p>Ambientes densos y opresivos que te envuelven desde el primer momento.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card reveal">
+              <div class="feature-icon">👁️</div>
+              <h3>Narrativa</h3>
+              <p>Una historia profunda que se revela poco a poco, pieza por pieza.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card reveal">
+              <div class="feature-icon">🔊</div>
+              <h3>Sonido</h3>
+              <p>Diseño sonoro inmersivo que juega con tus sentidos y tu mente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVANCES -->
+<section id="avances">
+  <div class="container">
+    <h2 class="section-title reveal">Avances</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="avance-card reveal">
+          <div class="avance-image">🎮</div>
+          <div class="avance-content">
+            <div class="avance-title">Primer Prototipo</div>
+            <div class="avance-date">Octubre 2026</div>
+            <p class="avance-description">
+              Completamos el primer prototipo jugable con las mecánicas básicas implementadas. 
+              El sistema de movimiento y exploración está funcionando correctamente.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="avance-card reveal">
+          <div class="avance-image">🎨</div>
+          <div class="avance-content">
+            <div class="avance-title">Concept Art</div>
+            <div class="avance-date">Septiembre 2026</div>
+            <p class="avance-description">
+              Finalizamos el concepto visual de los principales escenarios. La dirección artística 
+              define ambientes oscuros con toques de horror psicológico.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="avance-card reveal">
+          <div class="avance-image">🔊</div>
+          <div class="avance-content">
+            <div class="avance-title">Diseño Sonoro</div>
+            <div class="avance-date">Agosto 2026</div>
+            <p class="avance-description">
+              Iniciamos la producción del diseño sonoro. Los primeros efectos de ambiente y 
+              sonidos ambientales ya están siendo integrados en el motor del juego.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="avance-card reveal">
+          <div class="avance-image">📖</div>
+          <div class="avance-content">
+            <div class="avance-title">Historia y Lore</div>
+            <div class="avance-date">Julio 2026</div>
+            <p class="avance-description">
+              La narrativa principal está completa. Estamos desarrollando los diálogos y 
+              los documentos que revelarán la historia a los jugadores.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <h2 class="section-title reveal">Roadmap</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="roadmap-item reveal">
+          <div class="roadmap-content">
+            <div class="roadmap-phase">Fase I</div>
+            <div class="roadmap-date">Concepto & Prototipo</div>
+            <p>Definición del universo, mecánicas principales y primer prototipo jugable.</p>
+            <ul>
+              <li>Diseño del lore y personajes</li>
+              <li>Prototipo de mecánicas core</li>
+              <li>Concept art inicial</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="roadmap-item reveal">
+          <div class="roadmap-content">
+            <div class="roadmap-phase">Fase II</div>
+            <div class="roadmap-date">Desarrollo Activo</div>
+            <p>Construcción de niveles, implementación de sistemas y primeras pruebas internas.</p>
+            <ul>
+              <li>Desarrollo de niveles completos</li>
+              <li>Integración de audio y efectos</li>
+              <li>Sistema de guardado y progresión</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="roadmap-item reveal">
+          <div class="roadmap-content">
+            <div class="roadmap-phase">Fase III</div>
+            <div class="roadmap-date">Beta & Feedback</div>
+            <p>Lanzamiento de beta cerrada, recolección de feedback y ajustes finales.</p>
+            <ul>
+              <li>Beta cerrada para testers</li>
+              <li>Ajustes de balance y dificultad</li>
+              <li>Optimización de rendimiento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="roadmap-item reveal">
+          <div class="roadmap-content">
+            <div class="roadmap-phase">Fase IV</div>
+            <div class="roadmap-date">Lanzamiento</div>
+            <p>El momento en que MISNE verá la luz. Preparados para enfrentar lo desconocido.</p>
+            <ul>
+              <li>Lanzamiento oficial</li>
+              <li>Contenido post-lanzamiento</li>
+              <li>Comunidad y actualizaciones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title reveal">Contacto</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="contact-wrapper reveal text-center">
+          <p>
+            ¿Tienes alguna duda, sugerencia o quieres colaborar con nosotros?
+            <strong>Comunícate a nuestro correo</strong> y con gusto te responderemos.
+          </p>
+
+          <a href="mailto:contacto@misne.com" class="contact-email">
+            <span>contacto@misne.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
+<section id="donations">
+  <div class="container">
+    <h2 class="section-title reveal">Donaciones</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="donations-content reveal text-center">
+          <p>
+            <strong>MISNE</strong> es un proyecto independiente hecho con pasión y muchas horas de trabajo.
+            Tu apoyo nos ayuda a seguir desarrollando esta experiencia de terror y a crear contenido
+            que desafíe los límites de lo convencional. Si te gusta lo que hacemos,
+            <strong>invítanos un café</strong> y sé parte de esta historia oscura.
+          </p>
+
+          <a href="https://www.buymeacoffee.com/tu-usuario" target="_blank" rel="noopener" class="bmc-button">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.175-.354-.493-.54-.86-.63-.35-.086-.75-.153-1.1-.153H7.003c-.35 0-.75.067-1.1.153-.366.09-.685.276-.86.63-.148.297-.192.662-.25.987-.066.377-.126.755-.19 1.133-.037.206-.08.429-.232.572-.15.143-.373.172-.57.24-.613.217-.882.782-1 1.38l-.132.665c-.27 1.353-.292 2.772-.06 4.135.224 1.32.71 2.602 1.443 3.706.736 1.108 1.72 2.04 2.865 2.69 1.148.653 2.46.995 3.78 1.01 1.32-.015 2.632-.357 3.78-1.01 1.144-.65 2.128-1.582 2.865-2.69.734-1.104 1.22-2.386 1.443-3.706.23-1.363.21-2.782-.06-4.135zM12 16.5c-3.135 0-5.935-2.1-6.953-5.092C6.81 13.46 9.225 15 12 15s5.19-1.54 6.953-3.592C17.935 14.4 15.135 16.5 12 16.5z"/>
+            </svg>
+            <span>Buy Me a Coffee</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="social">
+    <a href="#">Twitter</a>
+    <a href="#">Discord</a>
+    <a href="#">YouTube</a>
+    <a href="#">Instagram</a>
+  </div>
+  <p>© 2026 MISNE — Todos los derechos reservados</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      if (navbarCollapse.classList.contains('show')) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+        bsCollapse.hide();
+      }
+    });
+  });
+
+  // Reveal on scroll
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
